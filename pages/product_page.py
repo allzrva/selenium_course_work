@@ -28,3 +28,11 @@ class ProductPage(BasePage):
             assert banner_price == product_price, \
                 f"Price of the product in the banner '{banner_price}' does not correspond " \
                 f"to the expected product name '{product_price}'"
+
+    def verify_no_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def verify_message_disappeared(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message should disappear in no longer than 4 seconds"
