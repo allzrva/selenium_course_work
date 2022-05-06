@@ -4,6 +4,8 @@ from selenium.common.exceptions import NoSuchElementException, NoAlertPresentExc
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.locators import BasePageLocators
+
 
 class BasePage(object):
     def __init__(self, browser, url, timeout=10):
@@ -13,6 +15,8 @@ class BasePage(object):
 
     def open(self):
         self.browser.get(self.url)
+
+    # region Element presence analysis
 
     def is_element_present(self, by_x, selector_str):
         try:
@@ -35,6 +39,23 @@ class BasePage(object):
         except TimeoutException:
             return False
         return True
+
+    # endregion Element presence analysis
+
+    # region Login field analysis
+
+    def should_be_login_link(self):
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link element is absent"
+
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        login_link.click()
+
+    # endregion Login field analysis
+
+    def go_to_basket_page(self):
+        go_to_basket_btn = self.browser.find_element(*BasePageLocators.GO_TO_BASKET_BTN)
+        go_to_basket_btn.click()
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert

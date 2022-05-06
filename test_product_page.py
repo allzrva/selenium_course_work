@@ -1,9 +1,11 @@
 """
 Runs tests from Module 4.3 https://stepik.org/lesson/201964/?unit=176022
-Tests to be run with command 'pytest -v -s --tb=line --language=en test_product_page.py'
+Tests can be run with command 'pytest -v -s --tb=line --language=en test_product_page.py'
 """
 import pytest
 
+from pages.basket_page import BasketPage
+from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 
 # For Task 4.3.2 use the link below and 'test_guest_can_add_product_to_basket'.
@@ -33,17 +35,17 @@ link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 def test_guest_can_add_product_to_basket(browser):
     page = ProductPage(browser, link, timeout=5)
     page.open()
-    page.click_add_to_cart_link()
+    page.click_add_to_basket_link()
     page.solve_quiz_and_get_code()
-    page.verify_correct_product_name_in_cart()
-    page.verify_correct_product_price_in_cart()
+    page.verify_correct_product_name_in_basket()
+    page.verify_correct_product_price_in_basket()
 
-# region task 4_3_6
+# region task 4_3_6 all tests skipped
 
 
 """
-lessons available at https://stepik.org/lesson/201964/step/5?unit=176022 and https://stepik.org/lesson/201964/step/6?unit=176022
-link for the test web page should be link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+Lessons available at https://stepik.org/lesson/201964/step/5?unit=176022 and https://stepik.org/lesson/201964/step/6?unit=176022
+Link for the test web page should be link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 All tests in the region are skipped because the task was temporary
 """
 
@@ -52,7 +54,7 @@ All tests in the region are skipped because the task was temporary
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     page = ProductPage(browser, link, timeout=5)
     page.open()
-    page.click_add_to_cart_link()
+    page.click_add_to_basket_link()
     page.verify_no_success_message()
 
 
@@ -67,7 +69,42 @@ def test_guest_cant_see_success_message(browser):
 def test_message_disappeared_after_adding_product_to_basket(browser):
     page = ProductPage(browser, link, timeout=5)
     page.open()
-    page.click_add_to_cart_link()
+    page.click_add_to_basket_link()
     page.verify_message_disappeared()
 
-# endregion task 4_3_6
+# endregion task 4_3_6 all tests skipped
+
+# region task 4_3_8 all tests skipped
+
+
+@pytest.mark.skip
+def test_guest_should_see_login_link_on_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.should_be_login_link()
+
+
+@pytest.mark.skip
+def test_guest_can_go_to_login_page_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_login_page()
+    login_page = LoginPage(browser, browser.current_url)
+    login_page.should_be_login_page()
+
+# endregion task 4_3_8 all tests skipped
+
+# region task 4_3_10
+
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    page = ProductPage(browser, link)
+    page.open()
+    page.go_to_basket_page()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.verify_no_items_in_basket()
+    basket_page.verify_text_basket_is_empty()
+
+# endregion task 4_3_10
