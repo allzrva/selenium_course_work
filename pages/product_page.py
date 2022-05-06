@@ -15,8 +15,8 @@ class ProductPage(BasePage):
             banner_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_CART).text
             product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
             assert banner_name == product_name,\
-                f"Name of the product in the banner {banner_name} does not correspond " \
-                f"to the expected product name {product_name}."
+                f"Name of the product in the banner '{banner_name}' does not correspond " \
+                f"to the expected product name '{product_name}'."
 
     def verify_correct_product_price_in_cart(self):
         try:
@@ -26,5 +26,5 @@ class ProductPage(BasePage):
             banner_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE_CART).text
             product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
             assert banner_price == product_price, \
-                f"Price of the product in the banner {banner_price} does not correspond " \
-                f"to the expected product name {product_price}"
+                f"Price of the product in the banner '{banner_price}' does not correspond " \
+                f"to the expected product name '{product_price}'"
