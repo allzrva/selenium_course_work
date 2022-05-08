@@ -3,6 +3,9 @@ from pages.locators import BasketPageLocators
 
 
 class BasketPage(BasePage):
+    """
+    Page Object for the basket page of the web site
+    """
     def __init__(self, *args, **kwargs):
         super(BasketPage, self).__init__(*args, **kwargs)
 
