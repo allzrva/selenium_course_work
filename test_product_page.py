@@ -5,9 +5,9 @@ Tests can be run with command 'pytest -v -s --language=en test_product_page.py'
 from datetime import datetime
 import pytest
 
-from pages.basket_page import BasketPage
-from pages.login_page import LoginPage
-from pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
+from .pages.product_page import ProductPage
 
 
 @pytest.mark.need_review

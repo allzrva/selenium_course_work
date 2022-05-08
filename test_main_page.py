@@ -2,9 +2,9 @@
 Runs tests from Module 4.3 https://stepik.org/lesson/201964/?unit=176022
 Tests can be run with command 'pytest -v --language=en test_main_page.py'
 """
-from pages.basket_page import BasketPage
-from pages.login_page import LoginPage
-from pages.main_page import MainPage
+from .pages.basket_page import BasketPage
+from .pages.login_page import LoginPage
+from .pages.main_page import MainPage
 
 link = "http://selenium1py.pythonanywhere.com/"
 
